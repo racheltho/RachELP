@@ -11,8 +11,10 @@ import UIKit
 class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet var tableView: UITableView!
+    @IBOutlet weak var navigationBar: UINavigationItem!
+    //@IBOutlet weak var searchBar: UISearchBar!
     
-    @IBOutlet weak var searchBar: UISearchBar!
+    var searchBar: UISearchBar!
     
     var yelpArray: NSArray!
     var pullRefreshControl: UIRefreshControl!
@@ -50,11 +52,15 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        //searchBar.delegate = self
+        searchBar = UISearchBar()
+        navigationBar.titleView = searchBar
         searchBar.delegate = self
         makeYelpRequest("Chocolate")
         pullRefreshControl = UIRefreshControl()
         pullRefreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(pullRefreshControl, atIndex: 0)
+
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {

@@ -4,7 +4,7 @@
         <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="6247"/>
     </dependencies>
     <scenes>
-        <!--Rachel's Yelp App-->
+        <!--rach-elp-->
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="YelpViewController" customModule="Yelp_Clone" customModuleProvider="target" sceneMemberID="viewController">
@@ -12,11 +12,6 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
-                        <searchBar key="tableHeaderView" contentMode="redraw" id="pvK-2r-r7g">
-                            <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
-                            <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
-                            <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
-                        </searchBar>
                         <prototypes>
                             <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="yelpCell" rowHeight="101" id="Xjm-DF-LuX" customClass="YelpCell" customModule="Yelp_Clone" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -71,15 +66,51 @@
                             <outlet property="dataSource" destination="vXZ-lx-hvc" id="eOs-6N-ZMa"/>
                         </connections>
                     </tableView>
-                    <navigationItem key="navigationItem" title="Rachel's Yelp App" id="U2Y-Qg-arV"/>
+                    <navigationItem key="navigationItem" title="rach-elp" id="U2Y-Qg-arV">
+                        <barButtonItem key="rightBarButtonItem" title="Filter" style="plain" id="P0b-kd-cVU">
+                            <color key="tintColor" red="0.27480413916515622" green="0.14258698589051866" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="SnV-93-Xpw" kind="modal" identifier="filterSegue" id="PTX-Dx-5Rg"/>
+                            </connections>
+                        </barButtonItem>
+                    </navigationItem>
                     <connections>
-                        <outlet property="searchBar" destination="pvK-2r-r7g" id="QD6-Kl-RC9"/>
+                        <outlet property="navigationBar" destination="U2Y-Qg-arV" id="yB6-OW-rGl"/>
                         <outlet property="tableView" destination="Wc5-Hr-Pys" id="9Ih-S1-5ol"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="541" y="149"/>
+        </scene>
+        <!--rach-elp filters-->
+        <scene sceneID="LPG-Xu-FY7">
+            <objects>
+                <viewController id="lN2-cb-Bdk" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Nff-MC-YwA"/>
+                        <viewControllerLayoutGuide type="bottom" id="HIu-HQ-9aW"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="7V8-zC-62o">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <navigationItem key="navigationItem" title="rach-elp filters" id="SZV-zB-Fpv">
+                        <barButtonItem key="leftBarButtonItem" title="Cancel" id="Eln-zO-h8I">
+                            <color key="tintColor" red="0.27480413920000002" green="0.14258698589999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                            <connections>
+                                <segue destination="vXZ-lx-hvc" kind="push" id="a1U-I8-pZF"/>
+                            </connections>
+                        </barButtonItem>
+                        <barButtonItem key="rightBarButtonItem" title="Search" id="dP3-dF-hsq">
+                            <color key="tintColor" red="0.27480413920000002" green="0.14258698589999999" blue="1" alpha="1" colorSpace="calibratedRGB"/>
+                        </barButtonItem>
+                    </navigationItem>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="Y3d-40-D45" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="1376" y="-240"/>
         </scene>
         <!--Yelp Details View Controller-->
         <scene sceneID="4Kh-Ut-92Q">
@@ -124,7 +155,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="MLP-I1-Lcv" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="949" y="159"/>
+            <point key="canvasLocation" x="996" y="398"/>
         </scene>
         <!--Navigation Controller-->
         <scene sceneID="g64-eV-zlL">
@@ -144,10 +175,32 @@
             </objects>
             <point key="canvasLocation" x="158" y="163"/>
         </scene>
+        <!--Navigation Controller-->
+        <scene sceneID="BmF-IP-Ucl">
+            <objects>
+                <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SnV-93-Xpw" sceneMemberID="viewController">
+                    <toolbarItems/>
+                    <navigationItem key="navigationItem" id="1FE-Gc-5J6"/>
+                    <navigationBar key="navigationBar" contentMode="scaleToFill" id="RD8-qU-3ab">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
+                        <autoresizingMask key="autoresizingMask"/>
+                    </navigationBar>
+                    <nil name="viewControllers"/>
+                    <connections>
+                        <segue destination="lN2-cb-Bdk" kind="relationship" relationship="rootViewController" id="rMM-xj-wG7"/>
+                    </connections>
+                </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7f0-fC-Cbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="989" y="-240"/>
+        </scene>
     </scenes>
     <simulatedMetricsContainer key="defaultSimulatedMetrics">
         <simulatedStatusBarMetrics key="statusBar"/>
         <simulatedOrientationMetrics key="orientation"/>
         <simulatedScreenMetrics key="destination" type="retina4"/>
     </simulatedMetricsContainer>
+    <inferredMetricsTieBreakers>
+        <segue reference="05J-Wf-9qS"/>
+    </inferredMetricsTieBreakers>
 </document>
