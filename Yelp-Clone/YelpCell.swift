@@ -19,8 +19,14 @@ class YelpCell: UITableViewCell {
     @IBOutlet weak var categoriesLabel: UILabel!
     
     override func awakeFromNib() {
+        businessName.preferredMaxLayoutWidth = businessName.frame.size.width
         super.awakeFromNib()
         // Initialization code
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        businessName.preferredMaxLayoutWidth = businessName.frame.size.width
     }
     
     override func setSelected(selected: Bool, animated: Bool) {

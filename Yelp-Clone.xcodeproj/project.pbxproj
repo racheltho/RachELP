@@ -80,6 +80,24 @@
 			name = Frameworks;
 			sourceTree = "<group>";
 		};
+		3E057F7E1A8BEC4E007665DE /* ViewControllers */ = {
+			isa = PBXGroup;
+			children = (
+				3E057F7C1A8BE4ED007665DE /* FilterViewController.swift */,
+				3E174CED1A8AEC81000514C9 /* YelpDetailsViewController.swift */,
+				3E561F1C1A8AC1D5006F0A30 /* YelpViewController.swift */,
+			);
+			name = ViewControllers;
+			sourceTree = "<group>";
+		};
+		3E057F7F1A8BECB6007665DE /* API */ = {
+			isa = PBXGroup;
+			children = (
+				3E859A111A8AD67500CAC07A /* YelpClient.swift */,
+			);
+			name = API;
+			sourceTree = "<group>";
+		};
 		3E561F0C1A8AC1D5006F0A30 = {
 			isa = PBXGroup;
 			children = (
@@ -103,18 +121,16 @@
 		3E561F171A8AC1D5006F0A30 /* Yelp-Clone */ = {
 			isa = PBXGroup;
 			children = (
+				3E057F7F1A8BECB6007665DE /* API */,
+				3E057F7E1A8BEC4E007665DE /* ViewControllers */,
 				3E859A081A8AC85000CAC07A /* Yelp-Clone-Bridging-Header.h */,
 				3E859A091A8AC85100CAC07A /* dummy.m */,
 				3E561F1A1A8AC1D5006F0A30 /* AppDelegate.swift */,
-				3E561F1C1A8AC1D5006F0A30 /* YelpViewController.swift */,
+				3E859A0D1A8ACCA300CAC07A /* YelpCell.swift */,
 				3E561F1E1A8AC1D5006F0A30 /* Main.storyboard */,
 				3E561F211A8AC1D5006F0A30 /* Images.xcassets */,
 				3E561F231A8AC1D5006F0A30 /* LaunchScreen.xib */,
 				3E561F181A8AC1D5006F0A30 /* Supporting Files */,
-				3E859A0D1A8ACCA300CAC07A /* YelpCell.swift */,
-				3E859A111A8AD67500CAC07A /* YelpClient.swift */,
-				3E174CED1A8AEC81000514C9 /* YelpDetailsViewController.swift */,
-				3E057F7C1A8BE4ED007665DE /* FilterViewController.swift */,
 			);
 			path = "Yelp-Clone";
 			sourceTree = "<group>";

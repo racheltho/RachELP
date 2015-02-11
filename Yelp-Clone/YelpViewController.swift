@@ -52,6 +52,8 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     override func viewDidLoad() {
         super.viewDidLoad()
         tableView.dataSource = self
+        tableView.estimatedRowHeight = 100
+        tableView.rowHeight = UITableViewAutomaticDimension
         //searchBar.delegate = self
         searchBar = UISearchBar()
         navigationBar.titleView = searchBar
@@ -79,7 +81,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
 
     
     func onRefresh() {
-        makeYelpRequest("Thai")
+        makeYelpRequest("Chocolate")
         self.pullRefreshControl.endRefreshing()
     }
     
@@ -93,8 +95,10 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         let business = self.yelpArray![indexPath.row] as NSDictionary
+        println(business)
         let cell = tableView.dequeueReusableCellWithIdentifier("yelpCell") as YelpCell
         cell.businessName.text = business["name"] as NSString
+        cell.businessName.preferredMaxLayoutWidth = cell.businessName.frame.size.width
         var image_url = business["image_url"] as NSString
         var rating_url = business["rating_img_url"] as NSString
         cell.thumbnailImage.setImageWithURL(NSURL(string: image_url))
@@ -113,6 +117,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         cell.address.text = addressArray[0] as NSString
         var review_count = business["review_count"] as NSInteger
         cell.reviewCount.text = "\(review_count) reviews"
+        
         return cell
     }
     
