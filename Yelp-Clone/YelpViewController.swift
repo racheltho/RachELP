@@ -51,7 +51,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         super.viewDidLoad()
         tableView.dataSource = self
         searchBar.delegate = self
-        makeYelpRequest("Thai")
+        makeYelpRequest("Chocolate")
         pullRefreshControl = UIRefreshControl()
         pullRefreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(pullRefreshControl, atIndex: 0)
@@ -93,6 +93,20 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         var rating_url = business["rating_img_url"] as NSString
         cell.thumbnailImage.setImageWithURL(NSURL(string: image_url))
         cell.ratingImage.setImageWithURL(NSURL(string: rating_url))
+        let categoriesArray = business["categories"] as NSArray
+        var categoriesStr = ""
+        for category in categoriesArray as NSArray {
+            if !categoriesStr.isEmpty{
+                categoriesStr += ", "
+            }
+            categoriesStr += category[0] as NSString
+        }
+        cell.categoriesLabel.text = categoriesStr
+        var location = business["location"] as NSDictionary
+        var addressArray = location["address"] as NSArray
+        cell.address.text = addressArray[0] as NSString
+        var review_count = business["review_count"] as NSInteger
+        cell.reviewCount.text = "\(review_count) reviews"
         return cell
     }
     

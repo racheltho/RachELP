@@ -18,15 +18,15 @@
                             <textInputTraits key="textInputTraits" keyboardType="alphabet"/>
                         </searchBar>
                         <prototypes>
-                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" accessoryType="disclosureIndicator" indentationWidth="10" reuseIdentifier="yelpCell" rowHeight="101" id="Xjm-DF-LuX" customClass="YelpCell" customModule="Yelp_Clone" customModuleProvider="target">
+                            <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="yelpCell" rowHeight="101" id="Xjm-DF-LuX" customClass="YelpCell" customModule="Yelp_Clone" customModuleProvider="target">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
                                 <autoresizingMask key="autoresizingMask"/>
                                 <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="Xjm-DF-LuX" id="As4-oz-HHd">
                                     <autoresizingMask key="autoresizingMask"/>
                                     <subviews>
                                         <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Restaurant Name" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qQX-O7-2Wc">
-                                            <rect key="frame" x="109" y="23" width="203" height="21"/>
-                                            <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                            <rect key="frame" x="109" y="8" width="203" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="16"/>
                                             <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                             <nil key="highlightedColor"/>
                                         </label>
@@ -34,13 +34,34 @@
                                             <rect key="frame" x="8" y="1" width="83" height="94"/>
                                         </imageView>
                                         <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="j0s-m7-eCP">
-                                            <rect key="frame" x="109" y="52" width="84" height="19"/>
+                                            <rect key="frame" x="109" y="33" width="84" height="19"/>
                                         </imageView>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="v1i-Yw-iKO">
+                                            <rect key="frame" x="109" y="53" width="203" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="14"/>
+                                            <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="MOZ-hU-BMy">
+                                            <rect key="frame" x="109" y="72" width="203" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.44943576388888884" green="0.44943576388888884" blue="0.44943576388888884" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
+                                        <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" fixedFrame="YES" text="Label" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="HTz-Bc-3sS">
+                                            <rect key="frame" x="201" y="34" width="111" height="21"/>
+                                            <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                            <color key="textColor" red="0.44943576390000001" green="0.44943576390000001" blue="0.44943576390000001" alpha="1" colorSpace="calibratedRGB"/>
+                                            <nil key="highlightedColor"/>
+                                        </label>
                                     </subviews>
                                 </tableViewCellContentView>
                                 <connections>
+                                    <outlet property="address" destination="v1i-Yw-iKO" id="enh-pr-UuJ"/>
                                     <outlet property="businessName" destination="qQX-O7-2Wc" id="urI-wD-fjA"/>
+                                    <outlet property="categoriesLabel" destination="MOZ-hU-BMy" id="6Gf-f7-8jT"/>
                                     <outlet property="ratingImage" destination="j0s-m7-eCP" id="kKk-7I-q4a"/>
+                                    <outlet property="reviewCount" destination="HTz-Bc-3sS" id="cdX-oE-SxQ"/>
                                     <outlet property="thumbnailImage" destination="1Qq-5B-2OR" id="HaA-eU-X7G"/>
                                     <segue destination="Gxu-HN-hqW" kind="push" identifier="yelpDetailsSegue" id="aRB-3U-51s"/>
                                 </connections>
@@ -58,7 +79,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="x5A-6p-PRh" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="541" y="157"/>
+            <point key="canvasLocation" x="541" y="149"/>
         </scene>
         <!--Yelp Details View Controller-->
         <scene sceneID="4Kh-Ut-92Q">
