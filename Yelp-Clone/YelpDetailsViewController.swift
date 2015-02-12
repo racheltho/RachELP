@@ -14,9 +14,7 @@ class YelpDetailsViewController: UIViewController {
     var yelpDictionary: NSDictionary?
     
     @IBOutlet weak var businessName: UILabel!
-    @IBOutlet weak var phone: UILabel!
     @IBOutlet weak var ratingsImage: UIImageView!
-    //@IBOutlet weak var yelpImage: UIImageView!
     @IBOutlet weak var mapView: MKMapView!
     @IBOutlet weak var reviewCount: UILabel!
     @IBOutlet weak var categoriesLabel: UILabel!
@@ -26,7 +24,6 @@ class YelpDetailsViewController: UIViewController {
     @IBAction func phoneCall(sender: AnyObject) {
         var url:NSURL? = NSURL(string: "tel://4097899223")
         UIApplication.sharedApplication().openURL(url!)
-        println("here")
     }
     
     
@@ -35,9 +32,8 @@ class YelpDetailsViewController: UIViewController {
         if let yelpDictionary = self.yelpDictionary? {
             businessName.text = yelpDictionary["name"] as NSString
             println(yelpDictionary)
-            phone.text = yelpDictionary["display_phone"] as NSString
-            println(phoneButton.titleLabel)
-            phoneButton.titleLabel!.text = "Call \(phone.text)"
+            var phone = yelpDictionary["display_phone"] as NSString
+            phoneButton.setTitle("Call \(phone)", forState: .Normal)
             var image_url = yelpDictionary["image_url"] as NSString
             var ratings_url = yelpDictionary["rating_img_url_large"] as NSString
             var locationDictionary = yelpDictionary["location"] as NSDictionary
