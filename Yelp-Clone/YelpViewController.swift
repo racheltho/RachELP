@@ -8,8 +8,9 @@
 
 import UIKit
 import MapKit
+import CoreLocation
 
-class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
+class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate, CLLocationManagerDelegate {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationItem!
@@ -23,6 +24,8 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     let yelpConsumerSecret = "XKyRdSuAJCo2_MJ7CroIXFodD6U"
     let yelpToken = "fnAtvAeALghdHe7hW6Au1EkbMQZ75HvG"
     let yelpTokenSecret = "GmyA6rp1D-Gmlgkr9Vl0fseK4tg"
+    
+    let locationManager = CLLocationManager()
     
     required init(coder aDecoder: NSCoder) {
         super.init(coder: aDecoder)
@@ -51,6 +54,11 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         tableView.dataSource = self
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableViewAutomaticDimension
+        locationManager.delegate = self
+        locationManager.desiredAccuracy = kCLLocationAccuracyBest
+        locationManager.startUpdatingLocation()
+        
+        
         //searchBar.delegate = self
         searchBar = UISearchBar()
         navigationBar.titleView = searchBar
@@ -60,6 +68,41 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         pullRefreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(pullRefreshControl, atIndex: 0)
 
+    }
+    
+    func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
+        
+        CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
+            
+            if (error != nil) {
+                println("Reverse geocoder failed with error" + error.localizedDescription)
+                return
+            }
+            if placemarks.count > 0 {
+                let pm = placemarks[0] as CLPlacemark
+                print(pm.locality?)
+                print(pm.postalCode?)
+                //self.displayLocationInfo(pm)
+            } else {
+                println("Problem with the data received from geocoder")
+            }
+        })
+    }
+//    func displayLocationInfo(placemark: CLPlacemark) {
+//        if let placemark2 = placemark {
+//            //stop updating location to save battery life
+//            locationManager.stopUpdatingLocation()
+//            println(placemark.locality ? placemark.locality : "")
+//            println(placemark.postalCode ? placemark.postalCode : "")
+//            println(placemark.administrativeArea ? placemark.administrativeArea : "")
+//            println(placemark.country ? placemark.country : "")
+//        }
+//
+//        
+//    }
+    
+    func locationManager(manager: CLLocationManager!, didFailWithError error: NSError!) {
+        println("Error while updating location " + error.localizedDescription)
     }
     
     func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
@@ -91,7 +134,6 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        
         
         let businessDict = self.yelpArray![indexPath.row] as NSDictionary
         let businessName = businessDict["name"] as NSString

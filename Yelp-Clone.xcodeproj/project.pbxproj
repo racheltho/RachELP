@@ -8,6 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		3E0036191A8D803500141CCC /* Business.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E0036181A8D803500141CCC /* Business.swift */; };
+		3E00361B1A8DB39200141CCC /* CoreLocation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3E00361A1A8DB39200141CCC /* CoreLocation.framework */; };
 		3E057F7D1A8BE4ED007665DE /* FilterViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E057F7C1A8BE4ED007665DE /* FilterViewController.swift */; };
 		3E174CEE1A8AEC81000514C9 /* YelpDetailsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E174CED1A8AEC81000514C9 /* YelpDetailsViewController.swift */; };
 		3E561F1B1A8AC1D5006F0A30 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E561F1A1A8AC1D5006F0A30 /* AppDelegate.swift */; };
@@ -16,6 +17,7 @@
 		3E561F221A8AC1D5006F0A30 /* Images.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 3E561F211A8AC1D5006F0A30 /* Images.xcassets */; };
 		3E561F251A8AC1D5006F0A30 /* LaunchScreen.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3E561F231A8AC1D5006F0A30 /* LaunchScreen.xib */; };
 		3E561F311A8AC1D5006F0A30 /* Yelp_CloneTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E561F301A8AC1D5006F0A30 /* Yelp_CloneTests.swift */; };
+		3E65DFD31A8E850E00F57D18 /* FilterTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E65DFD21A8E850E00F57D18 /* FilterTableViewCell.swift */; };
 		3E859A0A1A8AC85100CAC07A /* dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E859A091A8AC85100CAC07A /* dummy.m */; };
 		3E859A0E1A8ACCA300CAC07A /* YelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E859A0D1A8ACCA300CAC07A /* YelpCell.swift */; };
 		3E859A121A8AD67500CAC07A /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E859A111A8AD67500CAC07A /* YelpClient.swift */; };
@@ -35,6 +37,7 @@
 /* Begin PBXFileReference section */
 		25F869EEE9D7C2DB3911D87F /* Pods.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.debug.xcconfig; path = "Pods/Target Support Files/Pods/Pods.debug.xcconfig"; sourceTree = "<group>"; };
 		3E0036181A8D803500141CCC /* Business.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Business.swift; sourceTree = "<group>"; };
+		3E00361A1A8DB39200141CCC /* CoreLocation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreLocation.framework; path = System/Library/Frameworks/CoreLocation.framework; sourceTree = SDKROOT; };
 		3E057F7C1A8BE4ED007665DE /* FilterViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterViewController.swift; sourceTree = "<group>"; };
 		3E174CED1A8AEC81000514C9 /* YelpDetailsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpDetailsViewController.swift; sourceTree = "<group>"; };
 		3E561F151A8AC1D5006F0A30 /* Yelp-Clone.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "Yelp-Clone.app"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -47,6 +50,7 @@
 		3E561F2A1A8AC1D5006F0A30 /* Yelp-CloneTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "Yelp-CloneTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		3E561F2F1A8AC1D5006F0A30 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		3E561F301A8AC1D5006F0A30 /* Yelp_CloneTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Yelp_CloneTests.swift; sourceTree = "<group>"; };
+		3E65DFD21A8E850E00F57D18 /* FilterTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FilterTableViewCell.swift; sourceTree = "<group>"; };
 		3E859A081A8AC85000CAC07A /* Yelp-Clone-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "Yelp-Clone-Bridging-Header.h"; sourceTree = SOURCE_ROOT; };
 		3E859A091A8AC85100CAC07A /* dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dummy.m; path = ../dummy.m; sourceTree = "<group>"; };
 		3E859A0D1A8ACCA300CAC07A /* YelpCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpCell.swift; sourceTree = "<group>"; };
@@ -60,6 +64,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E00361B1A8DB39200141CCC /* CoreLocation.framework in Frameworks */,
 				ADC510EC7236FADFBBDD0C9E /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -77,6 +82,7 @@
 		2851BA5BA4EE93136C7F0B67 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				3E00361A1A8DB39200141CCC /* CoreLocation.framework */,
 				EF016869C8B18C085F95AB7B /* libPods.a */,
 			);
 			name = Frameworks;
@@ -131,13 +137,13 @@
 		3E561F171A8AC1D5006F0A30 /* Yelp-Clone */ = {
 			isa = PBXGroup;
 			children = (
+				3E65DFD11A8E84B500F57D18 /* Cells */,
 				3E0036171A8D802000141CCC /* Models */,
 				3E057F7F1A8BECB6007665DE /* API */,
 				3E057F7E1A8BEC4E007665DE /* ViewControllers */,
 				3E859A081A8AC85000CAC07A /* Yelp-Clone-Bridging-Header.h */,
 				3E859A091A8AC85100CAC07A /* dummy.m */,
 				3E561F1A1A8AC1D5006F0A30 /* AppDelegate.swift */,
-				3E859A0D1A8ACCA300CAC07A /* YelpCell.swift */,
 				3E561F1E1A8AC1D5006F0A30 /* Main.storyboard */,
 				3E561F211A8AC1D5006F0A30 /* Images.xcassets */,
 				3E561F231A8AC1D5006F0A30 /* LaunchScreen.xib */,
@@ -169,6 +175,15 @@
 				3E561F2F1A8AC1D5006F0A30 /* Info.plist */,
 			);
 			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+		3E65DFD11A8E84B500F57D18 /* Cells */ = {
+			isa = PBXGroup;
+			children = (
+				3E859A0D1A8ACCA300CAC07A /* YelpCell.swift */,
+				3E65DFD21A8E850E00F57D18 /* FilterTableViewCell.swift */,
+			);
+			name = Cells;
 			sourceTree = "<group>";
 		};
 		6D619D4A8F1EE6C2648E2928 /* Pods */ = {
@@ -315,6 +330,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3E65DFD31A8E850E00F57D18 /* FilterTableViewCell.swift in Sources */,
 				3E057F7D1A8BE4ED007665DE /* FilterViewController.swift in Sources */,
 				3E859A121A8AD67500CAC07A /* YelpClient.swift in Sources */,
 				3E859A0A1A8AC85100CAC07A /* dummy.m in Sources */,
