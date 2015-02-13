@@ -7,18 +7,16 @@
 //
 
 import UIKit
+import MapKit
 
 class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDelegate {
     
     @IBOutlet var tableView: UITableView!
     @IBOutlet weak var navigationBar: UINavigationItem!
-    //@IBOutlet weak var searchBar: UISearchBar!
     
     var searchBar: UISearchBar!
-    
     var yelpArray: NSArray!
     var pullRefreshControl: UIRefreshControl!
-    
     var client: YelpClient!
     
     let yelpConsumerKey = "2OzIjqFIIpy9o5KGa3Tg-A"
@@ -39,7 +37,6 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         
         client.searchWithTerm(searchTerm, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             let dictionary = response as NSDictionary
-            //let dictionary = NSJSONSerialization.JSONObjectWithData(response, options: nil, error: nil) as NSDictionary
             self.yelpArray = dictionary["businesses"] as NSArray
             self.tableView.reloadData()
             }) { (operation: AFHTTPRequestOperation!, error: NSError!) -> Void in
@@ -94,16 +91,15 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let business = self.yelpArray![indexPath.row] as NSDictionary
-        println(business)
-        let cell = tableView.dequeueReusableCellWithIdentifier("yelpCell") as YelpCell
-        cell.businessName.text = business["name"] as NSString
-        cell.businessName.preferredMaxLayoutWidth = cell.businessName.frame.size.width
-        var image_url = business["image_url"] as NSString
-        var rating_url = business["rating_img_url"] as NSString
-        cell.thumbnailImage.setImageWithURL(NSURL(string: image_url))
-        cell.ratingImage.setImageWithURL(NSURL(string: rating_url))
-        let categoriesArray = business["categories"] as NSArray
+        
+        
+        let businessDict = self.yelpArray![indexPath.row] as NSDictionary
+        let businessName = businessDict["name"] as NSString
+        let displayPhone = businessDict["display_phone"] as NSString
+        let imageURL = businessDict["image_url"] as NSString
+        let ratingsURL = businessDict["rating_img_url"] as NSString
+        let ratingsURLlarge = businessDict["rating_img_url_large"] as NSString
+        let categoriesArray = businessDict["categories"] as NSArray
         var categoriesStr = ""
         for category in categoriesArray as NSArray {
             if !categoriesStr.isEmpty{
@@ -111,12 +107,27 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
             }
             categoriesStr += category[0] as NSString
         }
+        let locationDict = businessDict["location"] as NSDictionary
+        let addressArray = locationDict["address"] as NSArray
+        let address = addressArray[0] as NSString
+        let coordinate = locationDict["coordinate"] as NSDictionary
+        let lat = coordinate["latitude"] as CLLocationDegrees
+        let lng = coordinate["longitude"] as CLLocationDegrees
+        let reviewCount = businessDict["review_count"] as NSInteger
+        
+        let cell = tableView.dequeueReusableCellWithIdentifier("yelpCell") as YelpCell
+        
+        cell.business = Business(businessName: businessName, displayPhone: displayPhone, imageURL: imageURL, ratingsURL: ratingsURL, ratingsURLlarge: ratingsURLlarge, categoriesStr: categoriesStr, lat: lat, lng: lng, address: address, reviewCount: reviewCount)
+        
+        println(cell.business)
+        
+        cell.businessName.text = businessName
+        cell.businessName.preferredMaxLayoutWidth = cell.businessName.frame.size.width
+        cell.thumbnailImage.setImageWithURL(NSURL(string: imageURL))
+        cell.ratingImage.setImageWithURL(NSURL(string: ratingsURL))
         cell.categoriesLabel.text = categoriesStr
-        var location = business["location"] as NSDictionary
-        var addressArray = location["address"] as NSArray
-        cell.address.text = addressArray[0] as NSString
-        var review_count = business["review_count"] as NSInteger
-        cell.reviewCount.text = "\(review_count) reviews"
+        cell.address.text = address
+        cell.reviewCount.text = "\(reviewCount) reviews"
         
         return cell
     }
@@ -127,7 +138,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
             let cell = sender as YelpCell
             if let indexPath = tableView.indexPathForCell(cell) {
                 let detailsController = segue.destinationViewController as YelpDetailsViewController
-                detailsController.yelpDictionary = self.yelpArray![indexPath.row] as? NSDictionary
+                detailsController.business = cell.business as Business
                 tableView.deselectRowAtIndexPath(indexPath, animated: true)
             }
         }

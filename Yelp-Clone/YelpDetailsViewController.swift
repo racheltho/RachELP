@@ -11,7 +11,7 @@ import MapKit
 
 class YelpDetailsViewController: UIViewController {
     
-    var yelpDictionary: NSDictionary?
+    var business: Business?
     
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var ratingsImage: UIImageView!
@@ -29,36 +29,19 @@ class YelpDetailsViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        if let yelpDictionary = self.yelpDictionary? {
-            businessName.text = yelpDictionary["name"] as NSString
-            println(yelpDictionary)
-            var phone = yelpDictionary["display_phone"] as NSString
+        if let business = self.business? {
+            businessName.text = business.businessName
+            let phone = business.displayPhone
             phoneButton.setTitle("Call \(phone)", forState: .Normal)
-            var image_url = yelpDictionary["image_url"] as NSString
-            var ratings_url = yelpDictionary["rating_img_url_large"] as NSString
-            var locationDictionary = yelpDictionary["location"] as NSDictionary
-            var addressArray = locationDictionary["address"] as NSArray
+            categoriesLabel.text = business.categoriesStr
+            reviewCount.text = "\(business.reviewCount) reviews"
+            address.text = business.address
+            let ratings_url = business.ratingsURLlarge
+            ratingsImage.setImageWithURL(NSURL(string: business.ratingsURLlarge))
             
-            let categoriesArray = yelpDictionary["categories"] as NSArray
-            var categoriesStr = ""
-            for category in categoriesArray as NSArray {
-                if !categoriesStr.isEmpty{
-                    categoriesStr += ", "
-                }
-                categoriesStr += category[0] as NSString
-            }
-            categoriesLabel.text = categoriesStr
-            var review_count = yelpDictionary["review_count"] as NSInteger
-            reviewCount.text = "\(review_count) reviews"
-            
-            address.text = addressArray[0] as NSString
-            var coordinate = locationDictionary["coordinate"] as NSDictionary
-            var lat = coordinate["latitude"] as CLLocationDegrees
-            var lng = coordinate["longitude"] as CLLocationDegrees
-            ratingsImage.setImageWithURL(NSURL(string: ratings_url))
             let locationCoords = CLLocationCoordinate2D(
-                latitude: lat,
-                longitude: lng
+                latitude: business.lat,
+                longitude: business.lng
             )
             let span = MKCoordinateSpanMake(0.01, 0.01)
             let region = MKCoordinateRegion(center: locationCoords, span: span)
@@ -67,8 +50,6 @@ class YelpDetailsViewController: UIViewController {
             annotation.setCoordinate(locationCoords)
             mapView.addAnnotation(annotation)
         }
-        
-        
     }
     
     override func didReceiveMemoryWarning() {

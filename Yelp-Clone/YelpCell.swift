@@ -18,6 +18,8 @@ class YelpCell: UITableViewCell {
     @IBOutlet weak var address: UILabel!
     @IBOutlet weak var categoriesLabel: UILabel!
     
+    var business: Business!
+    
     override func awakeFromNib() {
         businessName.preferredMaxLayoutWidth = businessName.frame.size.width
         super.awakeFromNib()
