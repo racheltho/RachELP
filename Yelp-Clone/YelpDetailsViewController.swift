@@ -12,6 +12,7 @@ import MapKit
 class YelpDetailsViewController: UIViewController {
     
     var business: Business?
+    var phone: NSString?
     
     @IBOutlet weak var businessName: UILabel!
     @IBOutlet weak var ratingsImage: UIImageView!
@@ -22,7 +23,8 @@ class YelpDetailsViewController: UIViewController {
     @IBOutlet weak var phoneButton: UIButton!
     
     @IBAction func phoneCall(sender: AnyObject) {
-        var url:NSURL? = NSURL(string: "tel://4097899223")
+        let telString = "tel://" + phone!
+        var url:NSURL? = NSURL(string: telString)
         UIApplication.sharedApplication().openURL(url!)
     }
     
@@ -31,8 +33,11 @@ class YelpDetailsViewController: UIViewController {
         super.viewDidLoad()
         if let business = self.business? {
             businessName.text = business.businessName
-            let phone = business.displayPhone
-            phoneButton.setTitle("Call \(phone)", forState: .Normal)
+            if(business.displayPhone? != nil && business.phone? != nil){
+                let displayPhone = business.displayPhone!
+                phone = business.phone
+                phoneButton.setTitle("Call \(displayPhone)", forState: .Normal)
+            }
             categoriesLabel.text = business.categoriesStr
             reviewCount.text = "\(business.reviewCount) reviews"
             address.text = business.address

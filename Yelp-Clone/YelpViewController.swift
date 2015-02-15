@@ -20,6 +20,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     var pullRefreshControl: UIRefreshControl!
     var client: YelpClient!
     var city: NSString! // = "San Francisco"
+    var coords: CLLocationCoordinate2D!
     var categories: NSString! // = "Chocolate"
     
     let yelpConsumerKey = "2OzIjqFIIpy9o5KGa3Tg-A"
@@ -34,31 +35,20 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     }
     
     
-    func makeYelpRequest(searchTerm: NSString!, city: NSString!){
+    func makeYelpRequest(var searchTerm: NSString?, var city: NSString?){
 
         SVProgressHUD.showProgress(0.4, status: "Loading")
         
-        var my_city: NSString
-        var my_search: NSString
-        
-        if let unwrapped_city = city {
-            my_city = unwrapped_city
-        } else {
-            my_city = "San Francisco"
+        if(searchTerm? == nil){
+            searchTerm = "Chocolate"
         }
-        if let unwrapped_search = searchTerm {
-            my_search = unwrapped_search
-        } else {
-            my_search = "Chocolate"
+        if(city? == nil){
+            city = "San Francisco"
         }
-        
         
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
-        println(my_city)
-        println(my_search)
-        
-        client.searchWithTerm(my_search, city: my_city, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        client.searchWithTerm(searchTerm!, city: city!, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             let dictionary = response as NSDictionary
             self.yelpArray = dictionary["businesses"] as NSArray
             self.tableView.reloadData()
@@ -93,6 +83,16 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
         
+//        var locationArray = locations as NSArray
+//        var locationObj = locationArray.lastObject as CLLocation
+//        var coord = locationObj.coordinate
+//        var lng = coord.longitude
+//        var lat = coord.latitude
+//        println(lng)
+//        println(lat)
+//        manager.stopUpdatingLocation()
+//        self.makeYelpRequest(self.categories, city: self.city)
+        
         CLGeocoder().reverseGeocodeLocation(manager.location, completionHandler: {(placemarks, error)->Void in
             
             if (error != nil) {
@@ -110,6 +110,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
             }
         })
     }
+    
 //    func displayLocationInfo(placemark: CLPlacemark) {
 //        if let placemark2 = placemark {
 //            //stop updating location to save battery life
@@ -159,8 +160,9 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         
         let businessDict = self.yelpArray![indexPath.row] as NSDictionary
         let businessName = businessDict["name"] as NSString
-        let displayPhone = businessDict["display_phone"] as NSString
-        let imageURL = businessDict["image_url"] as NSString
+        let displayPhone = businessDict["display_phone"]? as NSString?
+        let phone = businessDict["phone"]? as NSString?
+        let imageURL = businessDict["image_url"]? as NSString?
         let ratingsURL = businessDict["rating_img_url"] as NSString
         let ratingsURLlarge = businessDict["rating_img_url_large"] as NSString
         let categoriesArray = businessDict["categories"] as NSArray
@@ -181,11 +183,13 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         
         let cell = tableView.dequeueReusableCellWithIdentifier("yelpCell") as YelpCell
         
-        cell.business = Business(businessName: businessName, displayPhone: displayPhone, imageURL: imageURL, ratingsURL: ratingsURL, ratingsURLlarge: ratingsURLlarge, categoriesStr: categoriesStr, lat: lat, lng: lng, address: address, reviewCount: reviewCount)
+        cell.business = Business(businessName: businessName, displayPhone: displayPhone, phone: phone, imageURL: imageURL, ratingsURL: ratingsURL, ratingsURLlarge: ratingsURLlarge, categoriesStr: categoriesStr, lat: lat, lng: lng, address: address, reviewCount: reviewCount)
         
         cell.businessName.text = businessName
         cell.businessName.preferredMaxLayoutWidth = cell.businessName.frame.size.width
-        cell.thumbnailImage.setImageWithURL(NSURL(string: imageURL))
+        if (imageURL? != nil) {
+            cell.thumbnailImage.setImageWithURL(NSURL(string: imageURL!))
+        }
         cell.ratingImage.setImageWithURL(NSURL(string: ratingsURL))
         cell.categoriesLabel.text = categoriesStr
         cell.address.text = address

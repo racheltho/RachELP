@@ -6,7 +6,7 @@
 //  Copyright (c) 2015 Rachel Thomas. All rights reserved.
 //
 
-
+import MapKit
 import UIKit
 
 class YelpClient: BDBOAuth1RequestOperationManager {

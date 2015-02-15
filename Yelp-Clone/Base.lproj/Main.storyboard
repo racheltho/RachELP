@@ -235,7 +235,7 @@
                                 <color key="textColor" cocoaTouchSystemColor="darkTextColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
-                            <button opaque="NO" contentMode="scaleToFill" fixedFrame="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tim-5m-xn2">
+                            <button opaque="NO" contentMode="scaleToFill" ambiguous="YES" misplaced="YES" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="tim-5m-xn2">
                                 <rect key="frame" x="16" y="199" width="30" height="30"/>
                                 <state key="normal" title="Call">
                                     <color key="titleShadowColor" white="0.5" alpha="1" colorSpace="calibratedWhite"/>
@@ -261,6 +261,7 @@
                             <constraint firstItem="wFP-XH-s3f" firstAttribute="leading" secondItem="bkw-c6-KQm" secondAttribute="leading" id="FgP-BS-pv2"/>
                             <constraint firstAttribute="trailing" secondItem="bkw-c6-KQm" secondAttribute="trailing" constant="16" id="K0v-xz-0cn"/>
                             <constraint firstItem="bkw-c6-KQm" firstAttribute="leading" secondItem="Sr8-dm-6TQ" secondAttribute="leading" constant="16" id="KO3-oL-4LA"/>
+                            <constraint firstItem="bkw-c6-KQm" firstAttribute="top" secondItem="tim-5m-xn2" secondAttribute="bottom" constant="32" id="Wlf-rH-O9B"/>
                             <constraint firstItem="wFP-XH-s3f" firstAttribute="leading" secondItem="OYp-yU-MnD" secondAttribute="leading" id="lrN-5E-bQ3"/>
                         </constraints>
                     </view>

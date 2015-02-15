@@ -12,8 +12,9 @@ import MapKit
 
 class Business: NSObject {
     var businessName: NSString
-    var displayPhone: NSString
-    var imageURL: NSString
+    var displayPhone: NSString?
+    var phone: NSString?
+    var imageURL: NSString?
     var ratingsURL: NSString
     var ratingsURLlarge: NSString
     var categoriesStr: NSString
@@ -22,10 +23,11 @@ class Business: NSObject {
     var address: NSString
     var reviewCount: NSInteger
     
-    init(businessName: NSString, displayPhone: NSString, imageURL: NSString, ratingsURL: NSString, ratingsURLlarge: NSString, categoriesStr: NSString, lat: CLLocationDegrees, lng: CLLocationDegrees, address: NSString, reviewCount: NSInteger){
+    init(businessName: NSString, displayPhone: NSString?, phone: NSString?, imageURL: NSString?, ratingsURL: NSString, ratingsURLlarge: NSString, categoriesStr: NSString, lat: CLLocationDegrees, lng: CLLocationDegrees, address: NSString, reviewCount: NSInteger){
         self.businessName = businessName
-        self.displayPhone = displayPhone
-        self.imageURL = imageURL
+        self.displayPhone = displayPhone?
+        self.phone = phone?
+        self.imageURL = imageURL?
         self.ratingsURL = ratingsURL
         self.ratingsURLlarge = ratingsURLlarge
         self.categoriesStr = categoriesStr
