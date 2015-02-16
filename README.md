@@ -5,17 +5,21 @@ The details page includes a map of the restaurant location and a link to call th
 
 Required Features:
 - Search results page
-- Table rows are a dynamic height according to the content height and adjust depending on how many lines the restaurant name requires
-- Custom cells have the proper Auto Layout constraints
+- Table rows are a dynamic height according to the content height (in particular, adjusts appropriately for restaurant names that wrap onto a 2nd line)
+- Custom cells have the proper Auto Layout constraints, so UI works for portrait and landscape modes (GIFs of both are included below)
 - Search bar is in the navigation bar
-- Filters page with: category, sort (best match, distance, highest rated), deals (on/off).
-[ ] The filters table should be organized into sections as in the mock.
-[ ] You can use the default UISwitch for on/off states. Optional: implement a custom switch
-[ ] Clicking on the "Search" button should dismiss the filters page and trigger the search w/ the new filter settings.
-[ ] Display some of the available Yelp categories (choose any 3-4 that you want).
+- Filters page with 3 sections of filters: category, sort (best match, distance, highest rated), deals (on/off).
+- Clicking on the "Search" button should dismiss the filters page and trigger the search w/ the new filter settings
 
 Extra Features:
+- Restaurant details page that includes a map showing the restaurant location
+- User can click on the restaurant phone number and it will transfer to the phone app and make call (note that phone calls can not be tested in the iOS simulator, but I have downloaded the app to my actual phone and tested it there)
+- App uses user location if they choose to turn on location services.  In the iOS simulator, I have set the location to Apple (in Cupertino).  I have tested this on my actual phone in Sausalito as well.
 
 I spent around 18 hours on this app.
 
-![alt tag](https://github.com/racheltho/rotten-tomatoes-app/blob/master/RottenTomatoes/rotten-tomatoes2.gif)
+Portrait:
+![alt tag](https://github.com/racheltho/RachELP/blob/master/Yelp-Clone/yelp-app.gif)
+
+Landscape:
+![alt tag](https://github.com/racheltho/RachELP/blob/master/Yelp-Clone/yelp-app-landscape.gif)
