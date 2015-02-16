@@ -21,7 +21,9 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     var client: YelpClient!
     var city: NSString!
     //var coords: CLLocationCoordinate2D!
-    var categories: NSString!
+
+    var search: NSString!
+    var deals: Bool!
     var sortBy: NSInteger!
     
     let yelpConsumerKey = "2OzIjqFIIpy9o5KGa3Tg-A"
@@ -36,12 +38,12 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     }
     
     
-    func makeYelpRequest(var searchTerm: NSString?, var city: NSString?, var sortBy: NSInteger?){
+    func makeYelpRequest(var searchTerm: NSString?, var city: NSString?, var sortBy: NSInteger?, var deals: Bool?){
 
         SVProgressHUD.showProgress(0.4, status: "Loading")
         
         if(searchTerm? == nil){
-            searchTerm = "Chocolate"
+            searchTerm = "Restaurant"
         }
         if(city? == nil){
             city = "San Francisco"
@@ -49,10 +51,13 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         if(sortBy? == nil){
             sortBy = 0
         }
+        if(deals? == nil){
+            deals = false
+        }
         
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
-        client.searchWithTerm(searchTerm!, city: city!, sort: sortBy!, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        client.searchWithTerm(searchTerm!, city: city!, sort: sortBy!, deals: deals!, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             let dictionary = response as NSDictionary
             self.yelpArray = dictionary["businesses"] as NSArray
             self.tableView.reloadData()
@@ -78,7 +83,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         searchBar = UISearchBar()
         navigationBar.titleView = searchBar
         searchBar.delegate = self
-        makeYelpRequest(categories, city: city, sortBy: sortBy)
+        //makeYelpRequest(search, city: city, sortBy: sortBy, deals: deals)
         pullRefreshControl = UIRefreshControl()
         pullRefreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(pullRefreshControl, atIndex: 0)
@@ -86,7 +91,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     }
     
     func locationManager(manager: CLLocationManager!, didUpdateLocations locations: [AnyObject]!) {
-        
+        println("inside location manager")
 //        var locationArray = locations as NSArray
 //        var locationObj = locationArray.lastObject as CLLocation
 //        var coord = locationObj.coordinate
@@ -112,7 +117,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
                     println("Problem with the data received from geocoder")
                 }
             }
-            self.makeYelpRequest(self.categories, city: self.city, sortBy: self.sortBy)
+            self.makeYelpRequest(self.search, city: self.city, sortBy: self.sortBy, deals: self.deals)
         })
     }
     
@@ -134,13 +139,13 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     }
     
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        makeYelpRequest(searchBar.text, city: city, sortBy: sortBy)
+        makeYelpRequest(searchBar.text, city: city, sortBy: sortBy, deals: deals)
         searchBar.resignFirstResponder()
     }
 
     
     func onRefresh() {
-        makeYelpRequest(categories, city: city, sortBy: sortBy)
+        makeYelpRequest(search, city: city, sortBy: sortBy, deals: deals)
         self.pullRefreshControl.endRefreshing()
     }
     
@@ -204,7 +209,6 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
-        println(segue.destinationViewController.name)
         if segue.identifier == "yelpDetailsSegue" {
             let cell = sender as YelpCell
             if let indexPath = tableView.indexPathForCell(cell) {

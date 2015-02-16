@@ -6,13 +6,15 @@
 //  Copyright (c) 2015 Rachel Thomas. All rights reserved.
 //
 
-class FilterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterViewCellDelegate, SortByCellDelegate {
+class FilterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterViewCellDelegate, SortByCellDelegate, DealCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var filterSwitch: UISwitch!
     var filtersDictionary: [Int: Bool] = [Int: Bool]()
     
     var sortBy: Int!
+    
+    var deals: Bool!
     
     var CATEGORIES = [ ["Afghan", "afghani"] ]
     
@@ -175,24 +177,28 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
-        let nib = UINib(nibName: "SortByCell", bundle: NSBundle.mainBundle())
-        tableView.registerNib(nib, forCellReuseIdentifier: "sortbycell")
+        let sortNib = UINib(nibName: "SortByCell", bundle: NSBundle.mainBundle())
+        tableView.registerNib(sortNib, forCellReuseIdentifier: "sortbycell")
+        let dealNib = UINib(nibName: "DealCell", bundle: NSBundle.mainBundle())
+        tableView.registerNib(dealNib, forCellReuseIdentifier: "dealcell")
     }
     
     func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
         if(section == 0){
             return "Sort by:"
+        }else if(section == 1){
+            return "Deals:"
         }else{
             return "Categories:"
         }
     }
     
     func numberOfSectionsInTableView(tableView: UITableView) -> Int {
-        return 2
+        return 3
     }
     
     func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        if(section == 0){
+        if(section < 2){
             return 1
         } else {
             return CATEGORIES.count
@@ -200,7 +206,7 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        if(indexPath.section == 1){
+        if(indexPath.section == 2){
             let cell = tableView.dequeueReusableCellWithIdentifier("filtercell", forIndexPath: indexPath) as FilterTableViewCell
             let categoryPair = CATEGORIES[indexPath.row]
             cell.categoryLabel.text = categoryPair[0]
@@ -211,41 +217,48 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
                 cell.filterSwitch.on = false
             }
             return cell
-        }else{
+        }else if(indexPath.section == 0){
             let cell = tableView.dequeueReusableCellWithIdentifier("sortbycell", forIndexPath: indexPath) as SortByCell
+            cell.delegate = self
+            return cell
+        }else {
+            let cell = tableView.dequeueReusableCellWithIdentifier("dealcell", forIndexPath: indexPath) as DealCell
+            cell.dealSwitch.on = false
             cell.delegate = self
             return cell
         }
     }
     
     func filterView(filterCell: FilterTableViewCell, didChangeSwitchValue value: Bool) {
-        println("in filterView")
         let indexPath = tableView.indexPathForCell(filterCell)!
         filtersDictionary[indexPath.row] = value
     }
     
     func sortByView(sortByCell: SortByCell, segmentValue value: Int) {
-        println("in sortByView")
         sortBy = value
-        println(value)
+    }
+    
+    func dealView(dealCell: DealCell, didChangeSwitchValue value: Bool) {
+        deals = value
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
         if(segue.identifier == "searchSegue"){
-            var searchString = ""
+            var categoriesString = ""
             for (index, value)  in filtersDictionary {
                 if value {
-                    if (searchString != "") {
-                        searchString += ","
+                    if (categoriesString != "") {
+                        categoriesString += ","
                     }
                     var cat = CATEGORIES[index][1] as NSString
-                    searchString += cat
+                    categoriesString += cat
                 }
             }
-            println(searchString)
+            println(categoriesString)
             var YVC = segue.destinationViewController as YelpViewController
-            YVC.categories = searchString
+            YVC.search = categoriesString
             YVC.sortBy = sortBy
+            YVC.deals = deals
             println(sortBy)
         }
     }
