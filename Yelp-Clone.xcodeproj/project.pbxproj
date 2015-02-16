@@ -23,6 +23,8 @@
 		3E859A0A1A8AC85100CAC07A /* dummy.m in Sources */ = {isa = PBXBuildFile; fileRef = 3E859A091A8AC85100CAC07A /* dummy.m */; };
 		3E859A0E1A8ACCA300CAC07A /* YelpCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E859A0D1A8ACCA300CAC07A /* YelpCell.swift */; };
 		3E859A121A8AD67500CAC07A /* YelpClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3E859A111A8AD67500CAC07A /* YelpClient.swift */; };
+		3EDC6CC01A9194E400CB8C0D /* yelp-app.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC6CBF1A9194E400CB8C0D /* yelp-app.gif */; };
+		3EDC6CC21A9194EE00CB8C0D /* yelp-app-landscape.gif in Resources */ = {isa = PBXBuildFile; fileRef = 3EDC6CC11A9194EE00CB8C0D /* yelp-app-landscape.gif */; };
 		3EFF78B21A916FE0008BE691 /* SortByCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFF78B01A916FE0008BE691 /* SortByCell.swift */; };
 		3EFF78B31A916FE0008BE691 /* SortByCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 3EFF78B11A916FE0008BE691 /* SortByCell.xib */; };
 		ADC510EC7236FADFBBDD0C9E /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = EF016869C8B18C085F95AB7B /* libPods.a */; };
@@ -61,6 +63,8 @@
 		3E859A091A8AC85100CAC07A /* dummy.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; name = dummy.m; path = ../dummy.m; sourceTree = "<group>"; };
 		3E859A0D1A8ACCA300CAC07A /* YelpCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpCell.swift; sourceTree = "<group>"; };
 		3E859A111A8AD67500CAC07A /* YelpClient.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = YelpClient.swift; sourceTree = "<group>"; };
+		3EDC6CBF1A9194E400CB8C0D /* yelp-app.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "yelp-app.gif"; path = "Yelp-Clone/yelp-app.gif"; sourceTree = "<group>"; };
+		3EDC6CC11A9194EE00CB8C0D /* yelp-app-landscape.gif */ = {isa = PBXFileReference; lastKnownFileType = image.gif; name = "yelp-app-landscape.gif"; path = "Yelp-Clone/yelp-app-landscape.gif"; sourceTree = "<group>"; };
 		3EFF78B01A916FE0008BE691 /* SortByCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SortByCell.swift; sourceTree = "<group>"; };
 		3EFF78B11A916FE0008BE691 /* SortByCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = SortByCell.xib; sourceTree = "<group>"; };
 		A564B6B68F4489F66B2067A5 /* Pods.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = Pods.release.xcconfig; path = "Pods/Target Support Files/Pods/Pods.release.xcconfig"; sourceTree = "<group>"; };
@@ -125,6 +129,7 @@
 		3E561F0C1A8AC1D5006F0A30 = {
 			isa = PBXGroup;
 			children = (
+				3EDC6CBE1A9194D300CB8C0D /* Screenshots */,
 				3E561F171A8AC1D5006F0A30 /* Yelp-Clone */,
 				3E561F2D1A8AC1D5006F0A30 /* Yelp-CloneTests */,
 				3E561F161A8AC1D5006F0A30 /* Products */,
@@ -196,6 +201,15 @@
 				3E77BF701A9181A500D26AC0 /* DealCell.xib */,
 			);
 			name = Cells;
+			sourceTree = "<group>";
+		};
+		3EDC6CBE1A9194D300CB8C0D /* Screenshots */ = {
+			isa = PBXGroup;
+			children = (
+				3EDC6CC11A9194EE00CB8C0D /* yelp-app-landscape.gif */,
+				3EDC6CBF1A9194E400CB8C0D /* yelp-app.gif */,
+			);
+			name = Screenshots;
 			sourceTree = "<group>";
 		};
 		6D619D4A8F1EE6C2648E2928 /* Pods */ = {
@@ -289,10 +303,12 @@
 			isa = PBXResourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				3EDC6CC01A9194E400CB8C0D /* yelp-app.gif in Resources */,
 				3E561F201A8AC1D5006F0A30 /* Main.storyboard in Resources */,
 				3E561F251A8AC1D5006F0A30 /* LaunchScreen.xib in Resources */,
 				3EFF78B31A916FE0008BE691 /* SortByCell.xib in Resources */,
 				3E561F221A8AC1D5006F0A30 /* Images.xcassets in Resources */,
+				3EDC6CC21A9194EE00CB8C0D /* yelp-app-landscape.gif in Resources */,
 				3E77BF721A9181A500D26AC0 /* DealCell.xib in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
