@@ -1,7 +1,6 @@
 # rach-elp
 
-A swift app that uses the Yelp API to search for restaurants; filter based on category, sort-by preference, and deals; and view restaurant details.  
-The details page includes a map of the restaurant location and a link to call them. The user's location is determined using CLLocationManager.
+A swift app that uses the Yelp API to search for restaurants; filters based on category, sort-by preference, and deals; and displays restaurant details. The details page includes a map of the restaurant location and a link to call them. The user's location is determined using CLLocationManager.
 
 Required Features:
 - Search results page
@@ -19,7 +18,10 @@ Extra Features:
 I spent around 18 hours on this app.
 
 Portrait:
+
 ![alt tag](https://github.com/racheltho/RachELP/blob/master/Yelp-Clone/yelp-app.gif)
 
+
 Landscape:
+
 ![alt tag](https://github.com/racheltho/RachELP/blob/master/Yelp-Clone/yelp-app-landscape.gif)
