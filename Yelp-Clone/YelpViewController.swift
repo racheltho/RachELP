@@ -19,9 +19,10 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     var yelpArray: NSArray!
     var pullRefreshControl: UIRefreshControl!
     var client: YelpClient!
-    var city: NSString! // = "San Francisco"
-    var coords: CLLocationCoordinate2D!
-    var categories: NSString! // = "Chocolate"
+    var city: NSString!
+    //var coords: CLLocationCoordinate2D!
+    var categories: NSString!
+    var sortBy: NSInteger!
     
     let yelpConsumerKey = "2OzIjqFIIpy9o5KGa3Tg-A"
     let yelpConsumerSecret = "XKyRdSuAJCo2_MJ7CroIXFodD6U"
@@ -35,7 +36,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
     }
     
     
-    func makeYelpRequest(var searchTerm: NSString?, var city: NSString?){
+    func makeYelpRequest(var searchTerm: NSString?, var city: NSString?, var sortBy: NSInteger?){
 
         SVProgressHUD.showProgress(0.4, status: "Loading")
         
@@ -45,10 +46,13 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         if(city? == nil){
             city = "San Francisco"
         }
+        if(sortBy? == nil){
+            sortBy = 0
+        }
         
         client = YelpClient(consumerKey: yelpConsumerKey, consumerSecret: yelpConsumerSecret, accessToken: yelpToken, accessSecret: yelpTokenSecret)
         
-        client.searchWithTerm(searchTerm!, city: city!, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
+        client.searchWithTerm(searchTerm!, city: city!, sort: sortBy!, success: { (operation: AFHTTPRequestOperation!, response: AnyObject!) -> Void in
             let dictionary = response as NSDictionary
             self.yelpArray = dictionary["businesses"] as NSArray
             self.tableView.reloadData()
@@ -74,7 +78,7 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         searchBar = UISearchBar()
         navigationBar.titleView = searchBar
         searchBar.delegate = self
-        makeYelpRequest(categories, city: city)
+        makeYelpRequest(categories, city: city, sortBy: sortBy)
         pullRefreshControl = UIRefreshControl()
         pullRefreshControl.addTarget(self, action: "onRefresh", forControlEvents: UIControlEvents.ValueChanged)
         tableView.insertSubview(pullRefreshControl, atIndex: 0)
@@ -97,17 +101,18 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
             
             if (error != nil) {
                 println("Reverse geocoder failed with error" + error.localizedDescription)
-                return
             }
-            if placemarks.count > 0 {
-                let pm = placemarks[0] as CLPlacemark
-                self.city = pm.locality
-                println(self.city)
-                manager.stopUpdatingLocation()
-                self.makeYelpRequest(self.categories, city: self.city)
-            } else {
-                println("Problem with the data received from geocoder")
+            if(placemarks != nil){
+                if placemarks.count > 0 {
+                    let pm = placemarks[0] as CLPlacemark
+                    self.city = pm.locality
+                    println(self.city)
+                    manager.stopUpdatingLocation()
+                } else {
+                    println("Problem with the data received from geocoder")
+                }
             }
+            self.makeYelpRequest(self.categories, city: self.city, sortBy: self.sortBy)
         })
     }
     
@@ -128,23 +133,14 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
         println("Error while updating location " + error.localizedDescription)
     }
     
-    func searchBar(searchBar: UISearchBar, textDidChange searchText: String) {
-//        println(searchText)
-//        filteredData = searchText.isEmpty ? data : data.filter({(dataString: String) -> Bool in
-//            return dataString.rangeOfString(searchText, options: .CaseInsensitiveSearch) != nil
-//        })
-//      
-
-    }
-    
     func searchBarSearchButtonClicked(searchBar: UISearchBar) {
-        makeYelpRequest(searchBar.text, city: city)
+        makeYelpRequest(searchBar.text, city: city, sortBy: sortBy)
         searchBar.resignFirstResponder()
     }
 
     
     func onRefresh() {
-        makeYelpRequest(categories, city: city)
+        makeYelpRequest(categories, city: city, sortBy: sortBy)
         self.pullRefreshControl.endRefreshing()
     }
     
@@ -155,6 +151,15 @@ class YelpViewController: UIViewController, UITableViewDataSource, UISearchBarDe
             return 0
         }
     }
+    
+//    func tableView(tableView: UITableView, sectionForSectionIndexTitle title: String, atIndex index: Int) -> Int {
+//        if(index == 0){
+//            return "Sort by"
+//        }else{
+//            return "
+//        }
+//    }
+
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
         

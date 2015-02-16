@@ -9,7 +9,7 @@
         <scene sceneID="ufC-wZ-h7g">
             <objects>
                 <viewController id="vXZ-lx-hvc" customClass="YelpViewController" customModule="Yelp_Clone" customModuleProvider="target" sceneMemberID="viewController">
-                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="108" sectionHeaderHeight="22" sectionFooterHeight="22" id="Wc5-Hr-Pys">
+                    <tableView key="view" clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="22" sectionFooterHeight="22" id="Wc5-Hr-Pys">
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -128,9 +128,9 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="60" sectionHeaderHeight="22" sectionFooterHeight="22" translatesAutoresizingMaskIntoConstraints="NO" id="sWf-7t-bqG">
-                                <rect key="frame" x="0.0" y="20" width="320" height="555"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                            <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="grouped" separatorStyle="default" rowHeight="44" sectionHeaderHeight="10" sectionFooterHeight="10" translatesAutoresizingMaskIntoConstraints="NO" id="sWf-7t-bqG">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <color key="backgroundColor" cocoaTouchSystemColor="groupTableViewBackgroundColor"/>
                                 <prototypes>
                                     <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="filtercell" rowHeight="60" id="GZB-i5-Zos" customClass="FilterTableViewCell" customModule="Yelp_Clone" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="0.0" width="320" height="44"/>
@@ -168,10 +168,10 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="sWf-7t-bqG" firstAttribute="top" secondItem="Nff-MC-YwA" secondAttribute="bottom" id="0ZA-wa-KgF"/>
-                            <constraint firstItem="sWf-7t-bqG" firstAttribute="leading" secondItem="7V8-zC-62o" secondAttribute="leading" id="G0Q-rf-mIh"/>
-                            <constraint firstAttribute="bottom" secondItem="sWf-7t-bqG" secondAttribute="bottom" constant="-7" id="Q1H-M2-pmY"/>
-                            <constraint firstAttribute="trailing" secondItem="sWf-7t-bqG" secondAttribute="trailing" id="Ryp-Sb-5MM"/>
+                            <constraint firstItem="HIu-HQ-9aW" firstAttribute="top" secondItem="sWf-7t-bqG" secondAttribute="bottom" id="HJS-dZ-j8M"/>
+                            <constraint firstItem="sWf-7t-bqG" firstAttribute="leading" secondItem="7V8-zC-62o" secondAttribute="leading" id="P6R-iD-hAu"/>
+                            <constraint firstItem="sWf-7t-bqG" firstAttribute="top" secondItem="7V8-zC-62o" secondAttribute="top" id="kS8-jj-lzD"/>
+                            <constraint firstAttribute="trailing" secondItem="sWf-7t-bqG" secondAttribute="trailing" id="rNe-2b-AmG"/>
                         </constraints>
                     </view>
                     <navigationItem key="navigationItem" title="rach-elp filters" id="SZV-zB-Fpv">
@@ -301,7 +301,6 @@
         <!--Navigation Controller-->
         <scene sceneID="BmF-IP-Ucl">
             <objects>
-                <placeholder placeholderIdentifier="IBFirstResponder" id="7f0-fC-Cbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <navigationController automaticallyAdjustsScrollViewInsets="NO" id="SnV-93-Xpw" sceneMemberID="viewController">
                     <toolbarItems/>
                     <navigationItem key="navigationItem" id="1FE-Gc-5J6"/>
@@ -314,6 +313,7 @@
                         <segue destination="lN2-cb-Bdk" kind="relationship" relationship="rootViewController" id="rMM-xj-wG7"/>
                     </connections>
                 </navigationController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="7f0-fC-Cbs" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
             <point key="canvasLocation" x="989" y="-240"/>
         </scene>

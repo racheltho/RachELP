@@ -6,12 +6,13 @@
 //  Copyright (c) 2015 Rachel Thomas. All rights reserved.
 //
 
-class FilterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterViewCellDelegate {
+class FilterViewController: UIViewController, UITableViewDataSource, UITableViewDelegate, FilterViewCellDelegate, SortByCellDelegate {
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var filterSwitch: UISwitch!
     var filtersDictionary: [Int: Bool] = [Int: Bool]()
     
+    var sortBy: Int!
     
     var CATEGORIES = [ ["Afghan", "afghani"] ]
     
@@ -174,30 +175,59 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
         super.viewDidLoad()
         tableView.dataSource = self
         tableView.delegate = self
+        let nib = UINib(nibName: "SortByCell", bundle: NSBundle.mainBundle())
+        tableView.registerNib(nib, forCellReuseIdentifier: "sortbycell")
     }
     
-    func tableView(tableView: UITableView, numberOfRowsInSection: Int) -> Int {
-        return CATEGORIES.count
+    func tableView(tableView: UITableView, titleForHeaderInSection section: Int) -> String? {
+        if(section == 0){
+            return "Sort by:"
+        }else{
+            return "Categories:"
+        }
+    }
+    
+    func numberOfSectionsInTableView(tableView: UITableView) -> Int {
+        return 2
+    }
+    
+    func tableView(tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        if(section == 0){
+            return 1
+        } else {
+            return CATEGORIES.count
+        }
     }
     
     func tableView(tableView: UITableView, cellForRowAtIndexPath indexPath: NSIndexPath) -> UITableViewCell {
-        let cell = tableView.dequeueReusableCellWithIdentifier("filtercell", forIndexPath: indexPath) as FilterTableViewCell
-        let categoryPair = CATEGORIES[indexPath.row]
-        cell.categoryLabel.text = categoryPair[0]
-        cell.delegate = self
-        if let value = filtersDictionary[indexPath.row]{
-            cell.filterSwitch.on = value
-        } else {
-            cell.filterSwitch.on = false
+        if(indexPath.section == 1){
+            let cell = tableView.dequeueReusableCellWithIdentifier("filtercell", forIndexPath: indexPath) as FilterTableViewCell
+            let categoryPair = CATEGORIES[indexPath.row]
+            cell.categoryLabel.text = categoryPair[0]
+            cell.delegate = self
+            if let value = filtersDictionary[indexPath.row]{
+                cell.filterSwitch.on = value
+            } else {
+                cell.filterSwitch.on = false
+            }
+            return cell
+        }else{
+            let cell = tableView.dequeueReusableCellWithIdentifier("sortbycell", forIndexPath: indexPath) as SortByCell
+            cell.delegate = self
+            return cell
         }
-        
-        return cell
     }
     
     func filterView(filterCell: FilterTableViewCell, didChangeSwitchValue value: Bool) {
-        println("delegate")
+        println("in filterView")
         let indexPath = tableView.indexPathForCell(filterCell)!
         filtersDictionary[indexPath.row] = value
+    }
+    
+    func sortByView(sortByCell: SortByCell, segmentValue value: Int) {
+        println("in sortByView")
+        sortBy = value
+        println(value)
     }
     
     override func prepareForSegue(segue: UIStoryboardSegue, sender: AnyObject?) {
@@ -215,6 +245,8 @@ class FilterViewController: UIViewController, UITableViewDataSource, UITableView
             println(searchString)
             var YVC = segue.destinationViewController as YelpViewController
             YVC.categories = searchString
+            YVC.sortBy = sortBy
+            println(sortBy)
         }
     }
     
